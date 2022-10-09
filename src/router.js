@@ -1,12 +1,20 @@
 import { createRouter, createWebHistory } from "vue-router";
-import App from "./App.vue";
+import Home from "./views/Home.vue";
+import TodoPage from "./views/TodoPage.vue";
 
 const routes = [
   {
     path: "/",
-    component: App,
-    name: "App",
+    component: Home,
+    name: "Home",
     meta: { title: "Список дел" },
+  },
+  {
+    path: "/:id",
+    component: TodoPage,
+    name: "TodoPage",
+    meta: { title: "Список дел" },
+    props: { default: true, title: "" },
   },
 ];
 

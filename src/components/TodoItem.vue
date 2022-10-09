@@ -1,8 +1,11 @@
 <template>
 
   <li>
-    <span :class="{completed: isComplete}">{{item.title}}</span>
+    <router-link :to="{name: 'TodoPage', params: { id: item.id }}">
+      <span :class="{completed: isComplete}">{{item.title}}</span>
+    </router-link>
     <input type="checkbox" @change="isComplete = !isComplete">
+    <button>Удалить задачу</button>
   </li>
 
 </template>
@@ -11,12 +14,12 @@
 
 export default {
   name: "TodoItem",
-  props: { item: Object },
+  props: { item: Object, openItem: Function },
   data() {
     return {
       isComplete: false
     }
-  }
+  },
 }
 
 </script>

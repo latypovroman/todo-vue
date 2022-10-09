@@ -1,6 +1,6 @@
 <template>
   <form>
-    <input v-model="text">
+    <input v-model="text" placeholder="Новая задача" type="text" minlength="5">
     <button type="submit" @click="addTodo">Добавить</button>
   </form>
 </template>

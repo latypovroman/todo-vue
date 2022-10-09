@@ -4,7 +4,6 @@
         v-for="item in todos"
         :key="item.id"
         :item="item"
-
     />
   </ol>
   <AddForm :todos="todos"/>
