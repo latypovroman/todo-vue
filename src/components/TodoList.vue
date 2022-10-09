@@ -1,14 +1,19 @@
 <template>
-  <ul>
-    <li v-for="item in todo" :key="item.id">
-      {{item.title}}
-    </li>
-  </ul>
+  <ol>
+    <TodoItem
+        v-for="item in todo"
+        :key="item.id"
+        :item="item"
+    />
+  </ol>
 </template>
 
 <script>
+import TodoItem from "./TodoItem.vue";
+
 export default {
   name: "TodoList",
+  components: {TodoItem},
   data() {
     return {
       todo: [
