@@ -1,7 +1,7 @@
 <template>
   <form>
     <input v-model="text" placeholder="Новая задача" type="text" minlength="5">
-    <button type="submit" @click="addTodo">Добавить</button>
+    <button type="submit" @click="onSubmit">Добавить</button>
   </form>
 </template>
 
@@ -12,9 +12,9 @@ export default {
     todos: Array,
   },
   methods: {
-    addTodo(evt) {
+    onSubmit(evt) {
       evt.preventDefault();
-      this.todos.push({ id: this.todos.length + 1, title: this.text})
+      this.$store.commit('addTTodo', this.text)
       this.text = '';
     }
   },

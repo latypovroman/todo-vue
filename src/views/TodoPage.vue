@@ -1,8 +1,9 @@
 <template>
   <div>
-    <h1>Пост номер {{$route.params.id}}</h1>
+    <h2>Задача номер {{$store.state.todos[$route.params.id - 1].id}}</h2>
+    <p>{{$store.state.todos[$route.params.id - 1].title}}</p>
     <button @click="$router.push('/')">Вернуться</button>
-    <button>Удалить задачу</button>
+    <button @click="onDeleteClick">Удалить задачу</button>
   </div>
 </template>
 
@@ -10,12 +11,19 @@
 
 export default {
   name: "TodoPage",
-  created() {
-    console.log(this.$route)
+  methods: {
+    onDeleteClick(evt) {
+      evt.preventDefault();
+      this.$store.commit('deleteTodo', this.$route.params.id);
+      this.$router.push('/');
+    }
   },
 }
 </script>
 
 <style scoped>
-
+p {
+  font-size: 20px;
+  color: chocolate;
+}
 </style>
