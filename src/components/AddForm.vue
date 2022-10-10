@@ -6,6 +6,7 @@
 </template>
 
 <script>
+
 export default {
   name: "AddForm",
   props: {
@@ -14,7 +15,8 @@ export default {
   methods: {
     onSubmit(evt) {
       evt.preventDefault();
-      this.$store.commit('addTTodo', this.text)
+      console.log(this.$store)
+      this.$store.commit("todolist/addTodo", this.text)
       this.text = '';
     }
   },

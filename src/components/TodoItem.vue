@@ -5,7 +5,7 @@
       <span :class="{completed: isComplete}">{{item.title}}</span>
     </router-link>
     <input type="checkbox" @change="isComplete = !isComplete">
-    <button @click="onDeleteClick">Удалить задачу</button>
+    <button @click="onDeleteClick">Удалить </button>
   </li>
 
 </template>
@@ -23,7 +23,7 @@ export default {
   methods: {
     onDeleteClick(evt) {
       evt.preventDefault();
-      this.$store.commit('deleteTodo', this.item.id)
+      this.$store.commit('todolist/deleteTodo', this.item.id)
     }
   },
 }
