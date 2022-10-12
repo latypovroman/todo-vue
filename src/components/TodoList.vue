@@ -1,11 +1,11 @@
 <template>
-  <ol>
+  <ul>
     <TodoItem
         v-for="item in $store.state.todolist.todos"
         :key="item.id"
         :item="item"
     />
-  </ol>
+  </ul>
   <AddForm/>
 </template>
 
@@ -20,5 +20,8 @@ export default {
 </script>
 
 <style scoped>
-
+ul {
+  list-style: none;
+  padding: 0;
+}
 </style>

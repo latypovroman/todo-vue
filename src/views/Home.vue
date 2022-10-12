@@ -1,5 +1,4 @@
 <template>
-  <h1 class="header">Список дел</h1>
   <TodoList />
 </template>
 

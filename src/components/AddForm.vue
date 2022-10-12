@@ -1,7 +1,13 @@
 <template>
   <form>
-    <input v-model="text" placeholder="Новая задача" type="text" minlength="5">
-    <button type="submit" @click="onSubmit">Добавить</button>
+    <el-row>
+      <el-col :span="10">
+        <el-input v-model="text" placeholder="Новая задача" type="text" minlength="5"/>
+      </el-col>
+      <el-col :span="5">
+        <el-button type="submit" @click="onSubmit">Добавить</el-button>
+      </el-col>
+    </el-row>
   </form>
 </template>
 

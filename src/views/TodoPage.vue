@@ -2,8 +2,8 @@
   <div>
     <h2>Задача номер {{$store.state.todolist.todos[$route.params.id - 1].id}}</h2>
     <p>{{$store.state.todolist.todos[$route.params.id - 1].title}}</p>
-    <button @click="$router.push('/')">Вернуться</button>
-    <button @click="onDeleteClick">Удалить задачу</button>
+    <el-button @click="$router.push('/')">Вернуться</el-button>
+    <el-button @click="onDeleteClick" type="danger">Удалить задачу</el-button>
   </div>
 </template>
 
