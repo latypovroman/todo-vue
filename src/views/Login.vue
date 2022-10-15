@@ -5,14 +5,6 @@
 <script>
 export default {
   name: "Login",
-  data() {
-    return {
-      userdata: {
-        username: 'user',
-        password: '12345678'
-      }
-    }
-  },
   mounted() {
     this.$store.dispatch('user/login', {username: 'user', password: '12345678'})
   }

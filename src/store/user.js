@@ -1,4 +1,5 @@
-import axios from "axios";
+import axiosInstance from "../assets/axios";
+import router from "../router";
 
 export const user = {
   state: () => ({
@@ -12,14 +13,16 @@ export const user = {
   actions: {
     async login(context, { username, password }) {
       console.log(username, password);
-      const response = await axios.post(
-        "http://demo.telminov.ru:8082/user/login/",
-        {
-          username: "user",
-          password: "12345678",
-        }
-      );
-      context.commit("getToken", response.data.token);
+      const response = await axiosInstance.post("user/login/", {
+        username,
+        password,
+      });
+
+      console.log(response.data.token);
+      if (response.data.token) {
+        context.commit("getToken", response.data.token);
+        await router.push("/");
+      }
     },
   },
   namespaced: true,
