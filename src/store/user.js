@@ -12,16 +12,18 @@ export const user = {
   },
   actions: {
     async login(context, { username, password }) {
-      console.log(username, password);
-      const response = await axiosInstance.post("user/login/", {
-        username,
-        password,
-      });
+      try {
+        const response = await axiosInstance.post("user/login/", {
+          username,
+          password,
+        });
 
-      console.log(response.data.token);
-      if (response.data.token) {
-        context.commit("getToken", response.data.token);
-        await router.push("/");
+        if (response.data.token) {
+          context.commit("getToken", response.data.token);
+          await router.push("/");
+        }
+      } catch (err) {
+        alert(err);
       }
     },
   },

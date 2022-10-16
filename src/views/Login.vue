@@ -1,13 +1,14 @@
 <template>
 <h2>Пожалуйста, авторизуйтесь!</h2>
+  <AuthForm />
 </template>
 
 <script>
+import AuthForm from "../components/AuthForm.vue";
+
 export default {
   name: "Login",
-  mounted() {
-    this.$store.dispatch('user/login', {username: 'user', password: '12345678'})
-  }
+  components: {AuthForm}
 }
 </script>
 
