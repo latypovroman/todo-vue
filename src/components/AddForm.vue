@@ -1,14 +1,32 @@
 <template>
-  <form>
-    <el-row>
-      <el-col :span="10">
-        <el-input v-model="text" placeholder="Новая задача" type="text" minlength="5"/>
-      </el-col>
-      <el-col :span="5">
-        <el-button type="submit" @click="onSubmit">Добавить</el-button>
-      </el-col>
-    </el-row>
-  </form>
+  <el-form
+      :model="formData"
+      style="width: 400px"
+      @keyup.enter="onSubmit"
+      ref="addForm"
+      :rules="rules"
+  >
+    <el-form-item
+        prop="task"
+    >
+      <el-input
+          v-model="formData.text"
+          placeholder="Новая задача"
+          autocomplete="off"
+      />
+    </el-form-item>
+
+    <el-form-item>
+      <el-button
+          type="primary"
+          plain
+          @click="onSubmit"
+      >
+        Добавить
+      </el-button>
+    </el-form-item>
+  </el-form>
+
 </template>
 
 <script>
@@ -19,16 +37,20 @@ export default {
     todos: Array,
   },
   methods: {
-    onSubmit(evt) {
+    async onSubmit(evt) {
+      console.log(this.$refs.addForm.validate())
       evt.preventDefault();
-      console.log(this.$store)
-      this.$store.commit("todolist/addTodo", this.text)
-      this.text = '';
+      const isValid = await this.$refs.addForm.validate();
+      if (isValid) {
+        await this.$store.commit("todolist/addTodo", this.formData.text);
+        this.formData.text = '';
+      }
     }
   },
   data() {
     return {
-      text: '',
+      formData: { text: ''},
+      rules: {task: [{min: 5, message: 'Минимальная длина - 5 знаков'}]}
     }
   },
 }
