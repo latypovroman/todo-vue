@@ -8,7 +8,7 @@ import AuthForm from "../components/AuthForm.vue";
 
 export default {
   name: "Login",
-  components: {AuthForm}
+  components: {AuthForm},
 }
 </script>
 

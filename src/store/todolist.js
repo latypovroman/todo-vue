@@ -1,12 +1,13 @@
+import axiosInstance from "../assets/axios";
+
 export const todolist = {
   state: () => ({
-    todos: [
-      { id: 1, title: "Посмотреть лекции", isComplete: false },
-      { id: 2, title: "Разобраться с vue", isComplete: false },
-      { id: 3, title: "Запилить приложение", isComplete: false },
-    ],
+    todos: [],
   }),
   mutations: {
+    getTodos(state, array) {
+      state.todos = array;
+    },
     deleteTodo(state, id) {
       id = typeof id === "number" ? id : Number(id);
       state.todos = state.todos.filter((todo) => todo.id !== Number(id));
@@ -17,6 +18,17 @@ export const todolist = {
     switchCompletion(state, id) {
       console.log(state.todos[id - 1]);
       state.todos[id - 1].isComplete = !state.todos[id - 1].isComplete;
+    },
+  },
+  actions: {
+    async fetchTodos(context) {
+      const response = await axiosInstance.get("/items/", {
+        headers: {
+          Authorization: `Token ${context.rootState.user.token}`,
+        },
+      });
+      console.log(response.data);
+      context.commit("getTodos", response.data);
     },
   },
   namespaced: true,

@@ -16,6 +16,9 @@ import AddForm from "./AddForm.vue";
 export default {
   name: "TodoList",
   components: {AddForm, TodoItem},
+  mounted() {
+    this.$store.dispatch("todolist/fetchTodos");
+  }
 }
 </script>
 

@@ -5,6 +5,15 @@ export const user = {
   state: () => ({
     token: undefined,
   }),
+  getters: {
+    getToken(state) {
+      const storedToken = localStorage.getItem("jwt");
+      if (!state.token && storedToken) {
+        state.token = storedToken;
+      }
+      return storedToken;
+    },
+  },
   mutations: {
     getToken(state, string) {
       state.token = string;
@@ -17,9 +26,10 @@ export const user = {
           username,
           password,
         });
-
-        if (response.data.token) {
-          context.commit("getToken", response.data.token);
+        const token = response.data.token;
+        if (token) {
+          context.commit("getToken", token);
+          localStorage.setItem("jwt", token);
           await router.push("/");
         }
       } catch (err) {

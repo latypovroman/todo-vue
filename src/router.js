@@ -38,6 +38,10 @@ router.beforeEach(function (to, from, next) {
     next({ name: "Login" });
   }
 
+  if (store.getters["user/getToken"] && to.name === "Login") {
+    next({ name: "Home" });
+  }
+
   next();
 });
 
