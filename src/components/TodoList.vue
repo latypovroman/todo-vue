@@ -1,9 +1,11 @@
 <template>
+  <h2 v-if="$store.state.todolist.todos.length === 0">Нажмите "Добавить" для новой задачи</h2>
   <ul>
     <TodoItem
-        v-for="item in $store.state.todolist.todos"
+        v-for="(item, index) in $store.state.todolist.todos"
         :key="item.id"
         :item="item"
+        :count="index + 1"
     />
   </ul>
   <AddForm/>

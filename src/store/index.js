@@ -3,8 +3,6 @@ import { todolist } from "./todolist.js";
 import { user } from "./user";
 import axios from "axios";
 
-
-
 const store = createStore({
   modules: {
     todolist,
@@ -14,7 +12,7 @@ const store = createStore({
 
 export const axiosInstance = axios.create({
   baseURL: "http://demo.telminov.ru:8082/",
-  Authorization: `Token ${store.state.user.token}`
+  headers: {'Authorization': `Token ${localStorage.getItem('jwt')}`}
 });
 
 export default store;

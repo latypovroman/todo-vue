@@ -1,4 +1,4 @@
-import {axiosInstance} from "../store";
+import { axiosInstance } from "../store";
 import router from "../router";
 
 export const user = {
