@@ -1,4 +1,4 @@
-import axiosInstance from "../assets/axios";
+import {axiosInstance} from "../store";
 import router from "../router";
 
 export const user = {
@@ -12,7 +12,7 @@ export const user = {
         state.token = storedToken;
       }
       return storedToken;
-    },
+    }
   },
   mutations: {
     getToken(state, string) {

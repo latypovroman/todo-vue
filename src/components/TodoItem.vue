@@ -6,7 +6,7 @@
       <el-col :span="17">
         <router-link class="link" :to="{name: 'TodoPage', params: { id: item.id }}">
           <el-button :class="{completed: item.isComplete}" class="grid-content ep-bg-purple">
-            <span >{{item.title}}</span>
+            <span >{{item.name}}</span>
           </el-button>
         </router-link>
       </el-col>

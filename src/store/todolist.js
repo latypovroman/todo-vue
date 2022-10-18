@@ -1,4 +1,4 @@
-import axiosInstance from "../assets/axios";
+import {axiosInstance} from "../store";
 
 export const todolist = {
   state: () => ({
@@ -27,9 +27,11 @@ export const todolist = {
           Authorization: `Token ${context.rootState.user.token}`,
         },
       });
-      console.log(response.data);
       context.commit("getTodos", response.data);
     },
+    async postTodo(context) {
+
+    }
   },
   namespaced: true,
 };

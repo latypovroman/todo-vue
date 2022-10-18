@@ -33,16 +33,13 @@
 
 export default {
   name: "AddForm",
-  props: {
-    todos: Array,
-  },
   methods: {
     async onSubmit(evt) {
       console.log(this.$refs.addForm.validate())
       evt.preventDefault();
       const isValid = await this.$refs.addForm.validate();
       if (isValid) {
-        await this.$store.commit("todolist/addTodo", this.formData.text);
+        await this.$store.dispatch("todolist/postTodo", this.formData.text);
         this.formData.text = '';
       }
     }
