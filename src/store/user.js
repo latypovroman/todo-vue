@@ -18,6 +18,11 @@ export const user = {
     getToken(state, string) {
       state.token = string;
     },
+    logout(state) {
+      state.token = undefined;
+      localStorage.removeItem("jwt");
+      router.push("/login");
+    },
   },
   actions: {
     async login(context, { username, password }) {

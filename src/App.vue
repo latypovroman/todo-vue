@@ -1,13 +1,14 @@
 <script>
-
+import Header from "./components/Header.vue";
+export default {
+  components: {Header}
+}
 </script>
 
 <template>
   <div class="common-layout">
     <el-container>
-      <el-header>
-        <h1 class="header">Список дел</h1>
-      </el-header>
+      <Header />
       <el-main>
         <router-view></router-view>
       </el-main>
