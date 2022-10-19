@@ -1,7 +1,7 @@
 <template>
   <el-form
       :model="formData"
-      style="width: 400px"
+      style="width: 400px; margin-top: 30px"
       @keyup.enter="onSubmit"
       ref="addForm"
       :rules="rules"

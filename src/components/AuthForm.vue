@@ -51,7 +51,6 @@ export default {
   methods: {
     async onSubmit() {
       const isValid = await this.$refs.authForm.validate();
-      console.log(this.$refs.authForm)
       if (!isValid) {
         console.log('Данные не прошли валидацию');
         return

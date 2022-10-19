@@ -1,25 +1,32 @@
 import { axiosInstance } from "../store";
 import router from "../router";
+import login from "../views/Login.vue";
 
 export const user = {
   state: () => ({
     token: undefined,
+    username: '',
   }),
   getters: {
     getToken(state) {
       const storedToken = localStorage.getItem("jwt");
+      const storedUsername = localStorage.getItem('username');
       if (!state.token && storedToken) {
         state.token = storedToken;
+        state.username = storedUsername;
       }
       return storedToken;
     }
   },
   mutations: {
-    getToken(state, string) {
+    getData(state, { string, username }) {
       state.token = string;
+      state.username = username;
+      console.log(state.username)
     },
     logout(state) {
       state.token = undefined;
+      state.username = '';
       localStorage.removeItem("jwt");
       router.push("/login");
     },
@@ -33,7 +40,8 @@ export const user = {
         });
         const token = response.data.token;
         if (token) {
-          context.commit("getToken", token);
+          context.commit("getData", { token, username });
+          localStorage.setItem('username', username);
           localStorage.setItem("jwt", token);
           await router.push("/");
         }

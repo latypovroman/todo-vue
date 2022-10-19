@@ -1,16 +1,16 @@
 <template>
 
   <li>
-    <el-row gutter="20" align="middle">
+    <el-row :gutter="20" align="middle">
       <el-col :span="1">{{ count }}</el-col>
-      <el-col :span="17">
+      <el-col :span="12">
         <router-link class="link" :to="{name: 'TodoPage', params: { id: count }}">
           <el-button :class="{completed: item.done}" class="grid-content ep-bg-purple">
             <span >{{item.name}}</span>
           </el-button>
         </router-link>
       </el-col>
-      <el-col :span="6"><div class="grid-content ep-bg-purple-dark" />
+      <el-col :span="5"><div class="grid-content ep-bg-purple-dark" />
         <el-checkbox style="margin-right: 20px" :checked="item.done" size="large" @change="onCompleteClick"/>
         <el-button type="danger" @click="onDeleteClick">Удалить</el-button>
       </el-col>
@@ -57,6 +57,9 @@ export default {
   width: 100%
 }
 
+.el-row {
+  justify-content: center;
+}
 
 </style>
 
