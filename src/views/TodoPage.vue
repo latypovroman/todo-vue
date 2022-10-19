@@ -1,7 +1,8 @@
 <template>
   <div>
-    <h2>Задача номер {{$route.params.id}}</h2>
-    <p>{{openedTodo.name}}</p>
+    <p>Задача номер {{$route.params.id}}</p>
+    <h2>{{openedTodo.name}}</h2>
+    <p>{{openedTodo.description}}</p>
     <el-button @click="$router.push('/')">Вернуться</el-button>
     <el-button @click="onDeleteClick" type="danger">Удалить задачу</el-button>
   </div>

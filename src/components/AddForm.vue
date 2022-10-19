@@ -4,14 +4,23 @@
       style="width: 400px; margin-top: 30px"
       @keyup.enter="onSubmit"
       ref="addForm"
-      :rules="rules"
   >
     <el-form-item
         prop="task"
     >
       <el-input
-          v-model="formData.text"
+          v-model="formData.name"
           placeholder="Новая задача"
+          autocomplete="off"
+      />
+    </el-form-item>
+    <el-form-item
+        prop="description"
+    >
+      <el-input
+          v-model="formData.description"
+          type="textarea"
+          placeholder="Описание задачи (опционально)"
           autocomplete="off"
       />
     </el-form-item>
@@ -35,19 +44,21 @@ export default {
   name: "AddForm",
   methods: {
     async onSubmit(evt) {
-      console.log(this.$refs.addForm.validate())
       evt.preventDefault();
       const isValid = await this.$refs.addForm.validate();
       if (isValid) {
-        await this.$store.dispatch("todolist/postTodo", this.formData.text);
-        this.formData.text = '';
+        await this.$store.dispatch("todolist/postTodo", {
+          name: this.formData.name,
+          description: this.formData.description
+        });
+        this.formData.name = '';
+        this.formData.description = '';
       }
     }
   },
   data() {
     return {
-      formData: { text: ''},
-      rules: {task: [{min: 5, message: 'Минимальная длина - 5 знаков'}]}
+      formData: { name: '', description: ''},
     }
   },
 }

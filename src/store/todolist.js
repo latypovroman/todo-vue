@@ -12,8 +12,8 @@ export const todolist = {
       id = typeof id === "number" ? id : Number(id);
       state.todos = state.todos.filter((todo) => todo.id !== Number(id));
     },
-    addTodo(state, text) {
-      state.todos.push({ id: state.todos.length + 1, name: text });
+    addTodo(state, {name, description}) {
+      state.todos.push({ id: state.todos.length + 1, name, description });
     },
     switchCompletion(state, todo) {
       todo.done = !todo.done;
@@ -24,9 +24,9 @@ export const todolist = {
       const response = await axiosInstance.get("/items/");
       context.commit("getTodos", response.data);
     },
-    async postTodo(context, text) {
-      await axiosInstance.post("/items/", {name: text});
-      context.commit("addTodo", text);
+    async postTodo(context, { name, description }) {
+      await axiosInstance.post("/items/", {name, description});
+      context.commit("addTodo", {name, description});
     },
     async deleteTodo(context, id) {
       await axiosInstance.delete(`/items/${id}/`);
