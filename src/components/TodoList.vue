@@ -9,15 +9,27 @@
     />
   </ul>
   <AddForm/>
+  <EditPopup />
 </template>
 
 <script>
 import TodoItem from "./TodoItem.vue";
 import AddForm from "./AddForm.vue";
+import EditPopup from "./EditPopup.vue";
 
 export default {
   name: "TodoList",
-  components: {AddForm, TodoItem},
+  components: {AddForm, TodoItem, EditPopup},
+  data() {
+    return {
+      popup: {
+        isOpened: false,
+        name: '',
+        description: ''
+      },
+      editPopupOpened: false,
+    }
+  },
   mounted() {
     this.$store.dispatch("todolist/fetchTodos");
   }

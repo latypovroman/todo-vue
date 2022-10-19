@@ -1,8 +1,9 @@
 <template>
   <div>
-    <p>Задача номер {{$route.params.id}}</p>
+    <p style="font-size: 14px">Задача номер {{$route.params.id}}</p>
     <h2>{{openedTodo.name}}</h2>
-    <p>{{openedTodo.description}}</p>
+    <p v-if="openedTodo.description">{{openedTodo.description}}</p>
+    <p v-else style="color:grey">У этой задачи пока нет описания</p>
     <el-button @click="$router.push('/')">Вернуться</el-button>
     <el-button @click="onDeleteClick" type="danger">Удалить задачу</el-button>
   </div>

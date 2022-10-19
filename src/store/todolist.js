@@ -18,6 +18,11 @@ export const todolist = {
     switchCompletion(state, todo) {
       todo.done = !todo.done;
     },
+    editText(state, {id, name, description}) {
+      const todo = state.todos.find(todo => todo.id === id);
+      todo.name = name;
+      todo.description = description;
+    }
   },
   actions: {
     async fetchTodos(context) {
@@ -38,6 +43,11 @@ export const todolist = {
           ? await axiosInstance.patch(`/items/${id}/unset_done/`)
           : await axiosInstance.patch(`/items/${id}/set_done/`);
       commit("switchCompletion", todo)
+    },
+    async editTodo(context, { name, description, id }) {
+      console.log(id)
+      await axiosInstance.patch(`/items/${id}/`, { name, description });
+      context.commit("editText", { id, name, description});
     }
   },
   namespaced: true,

@@ -9,12 +9,17 @@
             <span >{{item.name}}</span>
           </el-button>
         </router-link>
+        <el-button style="margin-left: 3px" @click="onEditClick">
+          <el-icon :size="20"><Edit /></el-icon>
+        </el-button>
       </el-col>
       <el-col :span="5"><div class="grid-content ep-bg-purple-dark" />
         <el-checkbox style="margin-right: 20px" :checked="item.done" size="large" @change="onCompleteClick"/>
         <el-button type="danger" @click="onDeleteClick">Удалить</el-button>
       </el-col>
     </el-row>
+
+
   </li>
 
 </template>
@@ -30,8 +35,10 @@ export default {
       this.$store.dispatch('todolist/deleteTodo', this.item.id)
     },
     onCompleteClick() {
-      console.log(this.item.id)
       this.$store.dispatch('todolist/changeCompletion', this.item.id)
+    },
+    onEditClick() {
+      this.$store.commit('popup/openEditPopup', this.item);
 
     }
   },
@@ -54,11 +61,15 @@ export default {
 }
 
 .ep-bg-purple {
-  width: 100%
+  width: calc(100% - 45px)
 }
 
 .el-row {
   justify-content: center;
+}
+
+.el-button {
+  padding: 10px;
 }
 
 </style>
