@@ -21,7 +21,7 @@
     </el-form>
     <template #footer>
       <span class="dialog-footer">
-        <el-button @click="popup.isOpened = false">Cancel</el-button>
+        <el-button @click="onEditClose">Cancel</el-button>
         <el-button type="primary" @click="onEditConfirm"
         >Confirm</el-button
         >
@@ -45,6 +45,9 @@ export default {
         description: this.popup.description,
         id: this.popup.id
       })
+      this.$store.commit("popup/close")
+    },
+    onEditClose() {
       this.$store.commit("popup/close")
     }
   }
