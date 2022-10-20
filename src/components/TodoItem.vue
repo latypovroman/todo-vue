@@ -9,7 +9,7 @@
             <span >{{item.name}}</span>
           </el-button>
         </router-link>
-        <el-button style="margin-left: 3px" @click="onEditClick">
+        <el-button style="margin-left: 3px" @click="onEditClick" :disabled="item.done">
           <el-icon :size="20"><Edit /></el-icon>
         </el-button>
       </el-col>
@@ -18,8 +18,6 @@
         <el-button type="danger" @click="onDeleteClick">Удалить</el-button>
       </el-col>
     </el-row>
-
-
   </li>
 
 </template>

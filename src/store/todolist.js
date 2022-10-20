@@ -45,7 +45,6 @@ export const todolist = {
       commit("switchCompletion", todo)
     },
     async editTodo(context, { name, description, id }) {
-      console.log(id)
       await axiosInstance.patch(`/items/${id}/`, { name, description });
       context.commit("editText", { id, name, description});
     }
