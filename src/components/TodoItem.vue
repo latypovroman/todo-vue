@@ -4,7 +4,7 @@
     <el-row :gutter="20" align="middle">
       <el-col :span="1">{{ count }}</el-col>
       <el-col :span="12">
-        <router-link class="link" :to="{name: 'TodoPage', params: { id: count }}">
+        <router-link class="link" :to="{name: 'TodoPage', params: { id: item.id }}">
           <el-button :class="{completed: item.done}" class="grid-content ep-bg-purple">
             <span >{{item.name}}</span>
           </el-button>

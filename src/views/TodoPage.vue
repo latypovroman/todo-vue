@@ -1,6 +1,6 @@
 <template>
   <div>
-    <p style="font-size: 14px">Задача номер {{$route.params.id}}</p>
+    <p style="font-size: 14px">Задача номер {{todoIndex}}</p>
     <h2>{{openedTodo.name}}</h2>
     <p v-if="openedTodo.description">{{openedTodo.description}}</p>
     <p v-else style="color:grey">У этой задачи пока нет описания</p>
@@ -24,7 +24,11 @@ export default {
   },
   computed: {
     openedTodo() {
-      return this.$store.state.todolist.todos[this.$route.params.id - 1]
+      return this.$store.state.todolist.todos.find(todo => todo.id === Number(this.$route.params.id))
+    },
+    todoIndex() {
+      const index = this.$store.state.todolist.todos.findIndex(todo => todo.id === Number(this.$route.params.id))
+      return index + 1;
     }
   }
 }
