@@ -1,4 +1,4 @@
-import { axiosInstance } from "../store";
+import { axiosInstance } from "./index";
 
 export const todolist = {
   state: () => ({
@@ -12,8 +12,8 @@ export const todolist = {
       id = typeof id === "number" ? id : Number(id);
       state.todos = state.todos.filter((todo) => todo.id !== Number(id));
     },
-    addTodo(state, {name, description}) {
-      state.todos.push({ id: state.todos.length + 1, name, description });
+    addTodo(state, {name, description, id}) {
+      state.todos.push({ id, name, description });
     },
     switchCompletion(state, todo) {
       todo.done = !todo.done;
@@ -30,8 +30,9 @@ export const todolist = {
       context.commit("getTodos", response.data);
     },
     async postTodo(context, { name, description }) {
-      await axiosInstance.post("/items/", {name, description});
-      context.commit("addTodo", {name, description});
+      const response = await axiosInstance.post("/items/", {name, description});
+      console.log(response);
+      context.commit("addTodo", {name, description, id: response.data.id});
     },
     async deleteTodo(context, id) {
       await axiosInstance.delete(`/items/${id}/`);

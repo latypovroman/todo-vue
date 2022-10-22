@@ -1,5 +1,5 @@
 <template>
-  <Sort />
+  <Sort v-if="storedTodos.length > 0"/>
   <h2 v-if="storedTodos.length === 0">Нажмите "Добавить" для новой задачи</h2>
   <ul>
     <TodoItem
