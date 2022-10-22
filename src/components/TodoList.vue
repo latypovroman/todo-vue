@@ -21,9 +21,12 @@ import Sort from "./Sort.vue";
 
 export default {
   name: "TodoList",
-  components: {AddForm, TodoItem, EditPopup, Sort},
+  components: { AddForm, TodoItem, EditPopup, Sort },
   mounted() {
-    this.$store.dispatch("todolist/fetchTodos");
+    const jwt = localStorage.getItem('jwt')
+    if (jwt) {
+      this.$store.dispatch("todolist/fetchTodos");
+    }
   },
   computed: {
     storedTodos() {

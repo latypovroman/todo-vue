@@ -1,6 +1,9 @@
 <template>
-<h2>Пожалуйста, авторизуйтесь!</h2>
+  <h2>Пожалуйста, авторизуйтесь!</h2>
   <AuthForm />
+  <router-link class="link" :to="{name: 'Register'}">
+      На страницу Регистрации
+  </router-link>
 </template>
 
 <script>
@@ -15,5 +18,10 @@ export default {
 <style scoped>
   h2 {
     font-size: 1em;
+  }
+
+  .link {
+    text-decoration: none;
+    color: cornflowerblue;
   }
 </style>

@@ -1,9 +1,10 @@
 import { axiosInstance } from "./index";
 import router from "../router";
 
+
 export const user = {
   state: () => ({
-    token: undefined,
+    token: '',
     username: '',
   }),
   getters: {
@@ -18,8 +19,8 @@ export const user = {
     }
   },
   mutations: {
-    getData(state, { string, username }) {
-      state.token = string;
+    getData(state, { token, username }) {
+      state.token = token;
       state.username = username;
     },
     logout(state) {
@@ -32,12 +33,14 @@ export const user = {
   },
   actions: {
     async login(context, { username, password }) {
-
       try {
-        const response = await axiosInstance.post("user/login/", {
-          username,
-          password,
-        });
+        const response = await axiosInstance.post(
+            "/user/login/",
+            {
+                    username,
+                    password,
+                  });
+
         const token = response.data.token;
 
         if (token) {
@@ -49,6 +52,21 @@ export const user = {
         alert(err);
       }
       await router.push('/');
+    },
+    async register(context, {username, password}) {
+      try {
+        const response = await axiosInstance.post("/user/register/", {
+          username,
+          password,
+        });
+        const token = response.data.token;
+
+        if (token) {
+          await context.dispatch("login", { username, password })
+        }
+      } catch (err) {
+        alert(err);
+      }
     },
   },
   namespaced: true,

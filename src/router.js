@@ -3,6 +3,7 @@ import store from "./store";
 import Home from "./views/Home.vue";
 import TodoPage from "./views/TodoPage.vue";
 import Login from "./views/Login.vue";
+import Register from "./views/Register.vue";
 
 const routes = [
   {
@@ -16,6 +17,12 @@ const routes = [
     component: Login,
     name: "Login",
     meta: { title: "Страница логина" },
+  },
+  {
+    path: "/register",
+    component: Register,
+    name: "Register",
+    meta: { title: "Страница регистрации" },
   },
   {
     path: "/:id",
@@ -34,7 +41,7 @@ const router = createRouter({
 router.beforeEach(function (to, from, next) {
   document.title = to.meta.title || "TODO VUE APP";
 
-  if (!store.state.user.token && to.name !== "Login") {
+  if (!store.state.user.token && (to.name === "Home")) {
     next({ name: "Login" });
     return
   }
