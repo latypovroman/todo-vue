@@ -3,6 +3,7 @@ import { axiosInstance } from "./index";
 export const todolist = {
   state: () => ({
     todos: [],
+    isLoading: false,
   }),
   mutations: {
     getTodos(state, array) {
@@ -22,12 +23,24 @@ export const todolist = {
       const todo = state.todos.find(todo => todo.id === id);
       todo.name = name;
       todo.description = description;
+    },
+    setLoading(state) {
+      state.isLoading = true;
+    },
+    stopLoading(state) {
+      state.isLoading = false;
     }
   },
   actions: {
     async fetchTodos(context) {
-      const response = await axiosInstance.get("/items/");
-      context.commit("getTodos", response.data);
+      try {
+        const response = await axiosInstance.get("/items/");
+        context.commit("getTodos", response.data);
+      } catch (err) {
+        alert(err);
+      } finally {
+        context.commit("stopLoading");
+      }
     },
     async postTodo(context, { name, description }) {
       const response = await axiosInstance.post("/items/", {name, description});

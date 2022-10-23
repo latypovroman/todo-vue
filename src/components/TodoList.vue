@@ -22,12 +22,6 @@ import Sort from "./Sort.vue";
 export default {
   name: "TodoList",
   components: { AddForm, TodoItem, EditPopup, Sort },
-  mounted() {
-    const jwt = localStorage.getItem('jwt')
-    if (jwt) {
-      this.$store.dispatch("todolist/fetchTodos");
-    }
-  },
   computed: {
     storedTodos() {
       return this.$store.state.todolist.todos;
