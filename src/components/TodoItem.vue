@@ -1,20 +1,21 @@
 <template>
 
   <li>
-    <el-row :gutter="20" align="middle">
+    <el-row align="middle">
       <el-col :span="1">{{ count }}</el-col>
-      <el-col :span="12">
+      <el-col :span="16">
         <router-link class="link" :to="{name: 'TodoPage', params: { id: item.id }}">
           <el-button :class="{completed: item.done}" class="grid-content ep-bg-purple">
             <span >{{item.name}}</span>
           </el-button>
         </router-link>
-        <el-button style="margin-left: 3px" @click="onEditClick" :disabled="item.done">
-          <el-icon :size="20"><Edit /></el-icon>
+        <el-button @click="onEditClick" :disabled="item.done">
+          <el-icon :size="20" ><Edit /></el-icon>
         </el-button>
-      </el-col>
-      <el-col :span="5"><div class="grid-content ep-bg-purple-dark" />
-        <el-checkbox style="margin-right: 20px" :checked="item.done" size="large" @change="onCompleteClick"/>
+        <el-button style="padding: 8px" @click="onTTSClick" round>
+          <el-icon :size="15"><VideoPlay /></el-icon>
+        </el-button>
+        <el-checkbox :checked="item.done" size="large" @change="onCompleteClick"/>
         <el-button type="danger" @click="onDeleteClick">Удалить</el-button>
       </el-col>
     </el-row>
@@ -27,9 +28,13 @@
 export default {
   name: "TodoItem",
   props: { item: Object, count: Number },
+  mounted() {
+
+  },
   methods: {
     onDeleteClick(evt) {
       evt.preventDefault();
+      console.log(this.item);
       this.$store.dispatch('todolist/deleteTodo', this.item.id)
     },
     onCompleteClick() {
@@ -38,8 +43,11 @@ export default {
     onEditClick() {
       this.$store.commit('popup/openEditPopup', this.item);
 
+    },
+    onTTSClick() {
+      this.$store.dispatch('speech/fetchTTS', this.item.name);
     }
-  },
+  }
 }
 
 </script>
@@ -59,15 +67,19 @@ export default {
 }
 
 .ep-bg-purple {
-  width: calc(100% - 45px)
+  width: calc(100% - 220px)
 }
 
 .el-row {
   justify-content: center;
 }
+.el-checkbox {
+  margin-left: 8px;
+}
 
 .el-button {
   padding: 10px;
+  margin-left: 8px;
 }
 
 </style>
