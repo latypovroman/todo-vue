@@ -1,6 +1,6 @@
 <template>
   <Sort v-if="storedTodos.length > 0"/>
-  <h2 v-if="storedTodos.length === 0">Нажмите "Добавить" для новой задачи</h2>
+  <h2 v-if="storedTodos.length === 0">Нажмите "Добавить" для создания новой задачи</h2>
   <ul>
     <TodoItem
         v-for="(item, index) in sortedAndFilteredTodos"
