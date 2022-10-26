@@ -1,4 +1,5 @@
 <template>
+  <p>Задачи на сегодня, {{ getDate }}</p>
   <Sort v-if="storedTodos.length > 0"/>
   <h2 v-if="storedTodos.length === 0">Нажмите "Добавить" для создания новой задачи</h2>
   <ul>
@@ -23,6 +24,9 @@ export default {
   name: "TodoList",
   components: { AddForm, TodoItem, EditPopup, Sort },
   computed: {
+    getDate() {
+      return new Date().toISOString().slice(0, 10);
+    },
     storedTodos() {
       return this.$store.state.todolist.todos;
     },
@@ -68,6 +72,13 @@ export default {
 ul {
   list-style: none;
   padding: 0;
+}
+
+p {
+  text-align: right;
+  margin-right: 20%;
+  font-size: 20px;
+  font-weight: bold;
 }
 
 .el-row {
